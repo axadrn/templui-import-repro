@@ -1,0 +1,33 @@
+version: "3"
+
+tasks:
+  templ:
+    desc: templ watch + proxy + app server
+    cmds:
+      - go tool templ generate --watch --proxy="http://localhost:8091" --cmd="go run ./main.go" --open-browser=false
+
+  tailwind-watch:
+    desc: watch tailwind css
+    cmds:
+      - |
+        TEMPLUI_PATH="$(go list -m -f {{`'{{.Dir}}'`}} github.com/templui/templui)" && \
+        printf '%s\n' \
+          '@source "./**/*.templ";' \
+          "@source \"$TEMPLUI_PATH/components/**/*.templ\";" \
+          > ./assets/css/sources.generated.css && \
+        tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch
+
+  sync-js:
+    desc: sync templui js assets
+    cmds:
+      - |
+        TEMPLUI_PATH="$(go list -m -f {{`'{{.Dir}}'`}} github.com/templui/templui)" && \
+        mkdir -p ./assets/js/templui && \
+        find "$TEMPLUI_PATH/internal/components" -type f -name "*.js" ! -name "*.min.js" -exec cp {} ./assets/js/templui/ \;
+
+  dev:
+    desc: run full dev stack
+    deps:
+      - sync-js
+    cmds:
+      - task --parallel tailwind-watch templ
