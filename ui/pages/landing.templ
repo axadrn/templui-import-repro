@@ -42,10 +42,5 @@ templ Landing() {
 			</div>
 		</div>
 
-		@UIScript("/assets/js/templui/dialog.js")
 	}
-}
-
-templ UIScript(path string) {
-	<script defer nonce={ templ.GetNonce(ctx) } src={ cacheBustedScriptURL(path) }></script>
 }

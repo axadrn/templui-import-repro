@@ -4,14 +4,10 @@ go 1.24
 
 tool github.com/a-h/templ/cmd/templ
 
-replace github.com/templui/templui => /Users/axeladrian/dev/templui
-
-replace github.com/a-h/templ => /Users/axeladrian/dev/templ-pr1339
-
 require (
-	github.com/a-h/templ v0.3.986
+	github.com/a-h/templ v0.3.1001
 	github.com/joho/godotenv v1.5.1
-	github.com/templui/templui v0.0.0-00010101000000-000000000000
+	github.com/templui/templui v1.5.1-0.20260305071257-e76ea2024e45
 )
 
 require (

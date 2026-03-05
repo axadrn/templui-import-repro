@@ -17,17 +17,7 @@ tasks:
           > ./assets/css/sources.generated.css && \
         tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch
 
-  sync-js:
-    desc: sync templui js assets
-    cmds:
-      - |
-        TEMPLUI_PATH="$(go list -m -f {{`'{{.Dir}}'`}} github.com/templui/templui)" && \
-        mkdir -p ./assets/js/templui && \
-        find "$TEMPLUI_PATH/internal/components" -type f -name "*.js" ! -name "*.min.js" -exec cp {} ./assets/js/templui/ \;
-
   dev:
     desc: run full dev stack
-    deps:
-      - sync-js
     cmds:
       - task --parallel tailwind-watch templ

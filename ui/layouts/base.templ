@@ -1,9 +1,12 @@
 package layouts
 
+import "github.com/templui/templui/components/collapsible"
+
 templ BaseLayout() {
 	<!DOCTYPE html>
 	<html lang="en" class="h-full dark">
 		<head>
+			@collapsible.Script()
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>templUI Import Repro</title>
